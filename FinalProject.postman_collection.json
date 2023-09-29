@@ -1,0 +1,1169 @@
+{
+	"info": {
+		"_postman_id": "5443d235-8477-46b6-96ee-642552bca332",
+		"name": "FinalProject",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25811828"
+	},
+	"item": [
+		{
+			"name": "GET",
+			"item": [
+				{
+					"name": "check",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches string\", function () {\r",
+									"        pm.expect(pm.response.text()).to.include(\"Api is up and running!\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status code name has string\", function () {\r",
+									"    pm.response.to.have.status(\"OK\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}api",
+							"host": [
+								"{{url}}api"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ListProducts",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Status code name has string\", function () {\r",
+									"    pm.response.to.have.status(\"OK\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{currentToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJmZHNvdXphQHNxdWFkb3Jpb24ub3JnIiwiaWF0IjoxNjk1OTI3OTgwLCJleHAiOjE2OTYwMTQzODB9.lT3AGK-Jca5VbENaboIpkYvKDHv0filhczPufQkfAn4",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}",
+							"host": [
+								"{{url}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "POST",
+			"item": [
+				{
+					"name": "Add_New_Product",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches string\", function () {\r",
+									"        pm.expect(pm.response.text()).to.include(\"Produto cadastrado com sucesso!\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status code name has string\", function () {\r",
+									"    pm.response.to.have.status(\"OK\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{currentToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "idprodutos",
+									"value": "0",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "name",
+									"value": "Camisa",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "Camisa Manga Curta - Preta",
+									"type": "text"
+								},
+								{
+									"key": "price",
+									"value": "59.90",
+									"type": "text"
+								},
+								{
+									"key": "category",
+									"value": "Roupas",
+									"type": "text"
+								},
+								{
+									"key": "shipment",
+									"value": "20.00",
+									"type": "text"
+								},
+								{
+									"key": "idusuario",
+									"value": "85",
+									"type": "text"
+								},
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/D:/IJJ/Itensdesafio/camisa.png"
+								},
+								{
+									"key": "idusuario",
+									"value": "85",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}",
+							"host": [
+								"{{url}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json(); pm.environment.set(\"currentToken\", jsonData.token);\r",
+									"var token = pm.environment.get(\"currentToken\")\r",
+									"console.log(token)\r",
+									"\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches string\", function () {\r",
+									"        pm.expect(pm.response.text()).to.include(\"Usuário logado com sucesso!\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status code name has string\", function () {\r",
+									"    pm.response.to.have.status(\"OK\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"orion@squadorion.org\",\r\n  \"password\": \"orion1234\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}login",
+							"host": [
+								"{{url}}login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create_Login",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"// pm.environment.set(\"FullName\", pm.variables.replaceIn(\"{{$randomFirstName}}\") + \" \" + pm.variables.replaceIn(\"{{$randomLastName}}\"));\r",
+									"\r",
+									"// pm.environment.set(\"FirstName\", pm.variables.replaceIn(\"{{$randomFirstName}}\"))\r",
+									"\r",
+									"pm.environment.set(\"FirstName\", firstName());\r",
+									"\r",
+									"\r",
+									" function firstName() {\r",
+									"\r",
+									"    var firstName = [ \"Miguel\", \"Arthur\", \"Gael\", \"Theo\", \"Heitor\", \"Ravi\", \"Davi\", \"Bernardo\", \"Noah\", \"Gabriel\", \"Helena\", \"Alice\", \"Laura\", \"Sophia\", \"Manuela\", \"Maiteh\", \"Liz\", \"Cecilia\", \"Isabella\", \"Samuel\", \"Pedro\", \"Anthony\", \"Isaac\", \"Benicio\", \"Benjamin\", \"Matheus\", \"Joaquim\", \"Nicolas\", \"Lorenzo\", \"Henrique\", \"Jhon\",\"Rafael\", \"Henry\", \"Murilo\", \"Levi\", \"Guilherme\", \"Vicente\", \"Felipe\", \"Bryan\", \"Mateo\", \"Bento\", \"Pietro\", \"Leonardo\", \"Daniel\", \"Gustavo\", \"Lucas\", \"Emanuel\", \"Caleb\", \"Lucca\", \"Antonio\", \"Eduardo\", \"Enrico\", \"Caio\", \"Jose\", \"Augusto\", \"Mathias\", \"Vitor\", \"Enzo\", \"Cauan\", \"Francisco\", \"Rael\", \"Thomas\", \"Yuri\", \"Yan\", \"Oliver\", \"Otavio\", \"Nathan\", \"Vinicius\", \"Theodoro\", \"Valentim\", \"Ryan\", \"Luiz\", \"Leonovo\", \"Apollo\", \"Thiago\", \"Tomas\", \"Martin\", \"Erick\", \"Liam\", \"Josue\", \"Luan\", \"Asafe\", \"Raul\", \"Dominic\", \"Kaue\", \"Kalel\", \"Dom\", \"Estevao\", \"Breno\", \"Thales\", \"Israel\", \"Luisa\", \"Heloisa\", \"Elisa\", \"Julia\", \"Valentina\", \"Livia\", \"Antonella\", \"Lorena\", \"Ayla\", \"Isis\", \"Maya\", \"Esther\", \"Giovanna\", \"Lara\", \"Sarah\", \"Beatriz\", \"Aurora\", \"Mariana\", \"Olivia\", \"Isadora\", \"Luna\", \"Lunna\", \"Catarina\", \"Melissa\", \"Eduarda\", \"Lavinia\", \"Agatha\", \"Emanuelly\", \"Alicia\", \"Rebeca\", \"Yasmin\", \"Clara\", \"Marina\", \"Isabelly\", \"Ana\", \"Rafaela\", \"Stella\", \"Vitoria\", \"Allana\", \"Mirella\", \"Milena\", \"Bella\", \"Nicole\", \"Emilly\", \"Mariah\", \"Clarice\", \"Leticia\", \"Lais\", \"Bianca\", \"Melina\", \"Jade\", \"Fernanda\", \"Betina\", \"Heloise\", \"Zoe\", \"Louise\", \"Malu\", \"Melinda\", \"Chloe\", \"Flor\", \"Pietra\", \"Perola\", \"Elly\", \"Larissa\", \"Maria\", \"Eloah\", \"Eduarda\"]\r",
+									"\r",
+									" var randoItem = firstName[Math.floor(Math.random() * firstName.length)];\r",
+									"\r",
+									" return randoItem\r",
+									"\r",
+									" }\r",
+									"\r",
+									" function lastName(){\r",
+									"\r",
+									"     var lastName = [\"Alves da Silva\", \"Andrade Barbosa\", \"Barbosa Oliveira\", \"Oliveria da Silva\", \"Alves Pereira\", \"Conceição Barbosa\", \"Allen Young\", \"Almeida\", \"Alves\", \"Andrade\", \"Barbosa\", \"Barros\", \"Batista\", \"Borges\", \"Campos\", \"Cardoso\", \"Carvalho\", \"Castro\", \"Costa\", \"Dias\", \"Duarte\", \"Freitas\", \"Fernandes\", \"Ruy Barbosa\", \"Vital Brasil\", \"Miguel Pereira\", \"Maria da Anunciação\", \"Maria da Consolção\", \"Maria da Graça\", \"Maria Imaculada\", \"Maria do Céu\", \"Antunes\", \"Alves\", \"Fernandes\", \"Goncalves\", \"Nunes\", \"Pires\", \"Rodrigues\", \"Antonio Mariano\", \"Maria Isabel\", \"Almeida\", \"Azevedo\", \"Braga\", \"Barros\", \"Brasil\", \"Bahiense\", \"Campos\", \"Cardoso\", \"Correia\", \"Castro\", \"Costa\", \"Fontes\", \"Guimaraes\", \"Magalhaes\", \"Macedo\", \"Matos\", \"Pedreira\", \"Queiros\", \"Ribeiro\", \"Rocha\", \"Siqueira\", \"Sequeira\", \"Serra\", \"Souza\", \"Teixeira\", \"Valle\", \"Rossi\", \"Russo\", \"Ferrari\", \"Esposito\", \"Bianchi\", \"Romano\", \"Colombo\", \"Bruno\", \"Ricci\", \"Marino\", \"Greco\", \"Gallo\", \"DeLuca\", \"Conti\", \"Costa\", \"Mancini\", \"Giordano\", \"Rizzo\", \"Lombardi\", \"Barbieri\", \"Moretti\", \"Fontana\", \"Caruso\",\"Mariani\", \"Ferrara\", \"Santoro\", \"Rinaldi\", \"Leone\", \"Di Angelo\", \"Longo\", \"Galli\", \"Martini\", \"Martinelli\", \"Serra\", \"Conte\", \"Vitale\", \"Santis\", \"Marchetti\", \"Messina\", \"Gentile\", \"Villa\", \"Marini\", \"Lombardo\", \"Coppola\", \"Ferri\", \"Parisi\", \"Angelis\", \"Bianco\", \"Amato\", \"Fabbri\", \"Gatti\", \"Sala\", \"Morelli\", \"Grasso\", \"Pellegrini\", \"Ferraro\", \"Monti\", \"Palumbo\", \"Grassi\", \"Testa\", \"Valentini\", \"Carbone\", \"Benedetti\", \"Silvestri\", \"Farina\", \"Di Amico\", \"Martino\", \"Bernardi\", \"Caputo\", \"Mazza\", \"Sanna\", \"Fiore\", \"DeRosa\", \"Pellegrino\", \"Giuliani\", \"Rizzi\", \"Stefano\", \"Cattaneo\", \"Rossetti\", \"Orlando\", \"Basile\", \"Neri\", \"Baron\", \"EPalmieri\", \"Riva\", \"Romeo\", \"Franco\", \"Sorrentino\", \"Pagano\", \"Di Agostino\", \"Piras\", \"Ruggiero\", \"Montanari\", \"Battaglia\", \"Bellini\", \"Castelli\", \"Guerra\", \"Poli\", \"Valente\", \"Ferretti\"]\r",
+									"\r",
+									" var randoItem = lastName[Math.floor(Math.random() * lastName.length)];\r",
+									"\r",
+									" return randoItem\r",
+									"\r",
+									" }\r",
+									"\r",
+									" pm.environment.set(\"LastName\", lastName());\r",
+									"\r",
+									" pm.environment.set(\"FullName\", pm.variables.get(\"FirstName\") + \" \" + pm.variables.get(\"LastName\"));\r",
+									"\r",
+									"function password() {\r",
+									"\r",
+									"     var password = \"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789\";\r",
+									"\r",
+									"     var senha = \"@1aY\";\r",
+									"\r",
+									"     \r",
+									"     for (var i = 0; i < 10; i++) {\r",
+									"\r",
+									"     var randomIndex = Math.floor(Math.random() * password.length);\r",
+									"\r",
+									"     senha += password[randomIndex];\r",
+									"\r",
+									"     }\r",
+									"\r",
+									"     return senha;\r",
+									"\r",
+									"}\r",
+									"\r",
+									"console.log(password())\r",
+									"console.log()\r",
+									"\r",
+									"pm.environment.set(\"Password\",password())\r",
+									"\r",
+									"pm.environment.set(\"Increment\", Math.floor(Math.random()*( 99999 * 1 ) + 1))\r",
+									"\r",
+									"pm.environment.set(\"Mail\", pm.variables.get(\"FirstName\") + pm.variables.get(\"Increment\") + \"@squadorion.org\");"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Body matches string\", function () {\r",
+									"        pm.expect(pm.response.text()).to.include(\"Usuário cadastrado com sucesso\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status code name has string\", function () {\r",
+									"    pm.response.to.have.status(\"OK\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{currentToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"{{Mail}}\",\r\n  \"password\": \"{{Password}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}register",
+							"host": [
+								"{{url}}register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create_Login_Manual",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"// pm.environment.set(\"FullName\", pm.variables.replaceIn(\"{{$randomFirstName}}\") + \" \" + pm.variables.replaceIn(\"{{$randomLastName}}\"));\r",
+									"\r",
+									"// pm.environment.set(\"FirstName\", pm.variables.replaceIn(\"{{$randomFirstName}}\"))\r",
+									"\r",
+									"pm.environment.set(\"FirstName\", firstName());\r",
+									"\r",
+									"\r",
+									" function firstName() {\r",
+									"\r",
+									"    var firstName = [ \"Miguel\", \"Arthur\", \"Gael\", \"Theo\", \"Heitor\", \"Ravi\", \"Davi\", \"Bernardo\", \"Noah\", \"Gabriel\", \"Helena\", \"Alice\", \"Laura\", \"Sophia\", \"Manuela\", \"Maiteh\", \"Liz\", \"Cecilia\", \"Isabella\", \"Samuel\", \"Pedro\", \"Anthony\", \"Isaac\", \"Benicio\", \"Benjamin\", \"Matheus\", \"Joaquim\", \"Nicolas\", \"Lorenzo\", \"Henrique\", \"Jhon\",\"Rafael\", \"Henry\", \"Murilo\", \"Levi\", \"Guilherme\", \"Vicente\", \"Felipe\", \"Bryan\", \"Mateo\", \"Bento\", \"Pietro\", \"Leonardo\", \"Daniel\", \"Gustavo\", \"Lucas\", \"Emanuel\", \"Caleb\", \"Lucca\", \"Antonio\", \"Eduardo\", \"Enrico\", \"Caio\", \"Jose\", \"Augusto\", \"Mathias\", \"Vitor\", \"Enzo\", \"Cauan\", \"Francisco\", \"Rael\", \"Thomas\", \"Yuri\", \"Yan\", \"Oliver\", \"Otavio\", \"Nathan\", \"Vinicius\", \"Theodoro\", \"Valentim\", \"Ryan\", \"Luiz\", \"Leonovo\", \"Apollo\", \"Thiago\", \"Tomas\", \"Martin\", \"Erick\", \"Liam\", \"Josue\", \"Luan\", \"Asafe\", \"Raul\", \"Dominic\", \"Kaue\", \"Kalel\", \"Dom\", \"Estevao\", \"Breno\", \"Thales\", \"Israel\", \"Luisa\", \"Heloisa\", \"Elisa\", \"Julia\", \"Valentina\", \"Livia\", \"Antonella\", \"Lorena\", \"Ayla\", \"Isis\", \"Maya\", \"Esther\", \"Giovanna\", \"Lara\", \"Sarah\", \"Beatriz\", \"Aurora\", \"Mariana\", \"Olivia\", \"Isadora\", \"Luna\", \"Lunna\", \"Catarina\", \"Melissa\", \"Eduarda\", \"Lavinia\", \"Agatha\", \"Emanuelly\", \"Alicia\", \"Rebeca\", \"Yasmin\", \"Clara\", \"Marina\", \"Isabelly\", \"Ana\", \"Rafaela\", \"Stella\", \"Vitoria\", \"Allana\", \"Mirella\", \"Milena\", \"Bella\", \"Nicole\", \"Emilly\", \"Mariah\", \"Clarice\", \"Leticia\", \"Lais\", \"Bianca\", \"Melina\", \"Jade\", \"Fernanda\", \"Betina\", \"Heloise\", \"Zoe\", \"Louise\", \"Malu\", \"Melinda\", \"Chloe\", \"Flor\", \"Pietra\", \"Perola\", \"Elly\", \"Larissa\", \"Maria\", \"Eloah\", \"Eduarda\"]\r",
+									"\r",
+									" var randoItem = firstName[Math.floor(Math.random() * firstName.length)];\r",
+									"\r",
+									" return randoItem\r",
+									"\r",
+									" }\r",
+									"\r",
+									" function lastName(){\r",
+									"\r",
+									"     var lastName = [\"Alves da Silva\", \"Andrade Barbosa\", \"Barbosa Oliveira\", \"Oliveria da Silva\", \"Alves Pereira\", \"Conceição Barbosa\", \"Allen Young\", \"Almeida\", \"Alves\", \"Andrade\", \"Barbosa\", \"Barros\", \"Batista\", \"Borges\", \"Campos\", \"Cardoso\", \"Carvalho\", \"Castro\", \"Costa\", \"Dias\", \"Duarte\", \"Freitas\", \"Fernandes\", \"Ruy Barbosa\", \"Vital Brasil\", \"Miguel Pereira\", \"Maria da Anunciação\", \"Maria da Consolção\", \"Maria da Graça\", \"Maria Imaculada\", \"Maria do Céu\", \"Antunes\", \"Alves\", \"Fernandes\", \"Goncalves\", \"Nunes\", \"Pires\", \"Rodrigues\", \"Antonio Mariano\", \"Maria Isabel\", \"Almeida\", \"Azevedo\", \"Braga\", \"Barros\", \"Brasil\", \"Bahiense\", \"Campos\", \"Cardoso\", \"Correia\", \"Castro\", \"Costa\", \"Fontes\", \"Guimaraes\", \"Magalhaes\", \"Macedo\", \"Matos\", \"Pedreira\", \"Queiros\", \"Ribeiro\", \"Rocha\", \"Siqueira\", \"Sequeira\", \"Serra\", \"Souza\", \"Teixeira\", \"Valle\", \"Rossi\", \"Russo\", \"Ferrari\", \"Esposito\", \"Bianchi\", \"Romano\", \"Colombo\", \"Bruno\", \"Ricci\", \"Marino\", \"Greco\", \"Gallo\", \"DeLuca\", \"Conti\", \"Costa\", \"Mancini\", \"Giordano\", \"Rizzo\", \"Lombardi\", \"Barbieri\", \"Moretti\", \"Fontana\", \"Caruso\",\"Mariani\", \"Ferrara\", \"Santoro\", \"Rinaldi\", \"Leone\", \"Di Angelo\", \"Longo\", \"Galli\", \"Martini\", \"Martinelli\", \"Serra\", \"Conte\", \"Vitale\", \"Santis\", \"Marchetti\", \"Messina\", \"Gentile\", \"Villa\", \"Marini\", \"Lombardo\", \"Coppola\", \"Ferri\", \"Parisi\", \"Angelis\", \"Bianco\", \"Amato\", \"Fabbri\", \"Gatti\", \"Sala\", \"Morelli\", \"Grasso\", \"Pellegrini\", \"Ferraro\", \"Monti\", \"Palumbo\", \"Grassi\", \"Testa\", \"Valentini\", \"Carbone\", \"Benedetti\", \"Silvestri\", \"Farina\", \"Di Amico\", \"Martino\", \"Bernardi\", \"Caputo\", \"Mazza\", \"Sanna\", \"Fiore\", \"DeRosa\", \"Pellegrino\", \"Giuliani\", \"Rizzi\", \"Stefano\", \"Cattaneo\", \"Rossetti\", \"Orlando\", \"Basile\", \"Neri\", \"Baron\", \"EPalmieri\", \"Riva\", \"Romeo\", \"Franco\", \"Sorrentino\", \"Pagano\", \"Di Agostino\", \"Piras\", \"Ruggiero\", \"Montanari\", \"Battaglia\", \"Bellini\", \"Castelli\", \"Guerra\", \"Poli\", \"Valente\", \"Ferretti\"]\r",
+									"\r",
+									" var randoItem = lastName[Math.floor(Math.random() * lastName.length)];\r",
+									"\r",
+									" return randoItem\r",
+									"\r",
+									" }\r",
+									"\r",
+									" pm.environment.set(\"LastName\", lastName());\r",
+									"\r",
+									" pm.environment.set(\"FullName\", pm.variables.get(\"FirstName\") + \" \" + pm.variables.get(\"LastName\"));\r",
+									"\r",
+									"function password() {\r",
+									"\r",
+									"     var password = \"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789\";\r",
+									"\r",
+									"     var senha = \"@1aY\";\r",
+									"\r",
+									"     \r",
+									"     for (var i = 0; i < 10; i++) {\r",
+									"\r",
+									"     var randomIndex = Math.floor(Math.random() * password.length);\r",
+									"\r",
+									"     senha += password[randomIndex];\r",
+									"\r",
+									"     }\r",
+									"\r",
+									"     return senha;\r",
+									"\r",
+									"}\r",
+									"\r",
+									"console.log(password())\r",
+									"console.log()\r",
+									"\r",
+									"pm.environment.set(\"Password\",password())\r",
+									"\r",
+									"pm.environment.set(\"Increment\", Math.floor(Math.random()*( 99999 * 1 ) + 1))\r",
+									"\r",
+									"pm.environment.set(\"Mail\", pm.variables.get(\"FirstName\") + pm.variables.get(\"Increment\") + \"@squadorion.org\");"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Status code name has string\", function () {\r",
+									"    pm.response.to.have.status(\"OK\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{currentToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"orion@squadorion.org\",\r\n  \"password\": \"orion1234\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}register",
+							"host": [
+								"{{url}}register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create_Login_Password_Fraco",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"// pm.environment.set(\"FullName\", pm.variables.replaceIn(\"{{$randomFirstName}}\") + \" \" + pm.variables.replaceIn(\"{{$randomLastName}}\"));\r",
+									"\r",
+									"// pm.environment.set(\"FirstName\", pm.variables.replaceIn(\"{{$randomFirstName}}\"))\r",
+									"\r",
+									"pm.environment.set(\"FirstName\", firstName());\r",
+									"\r",
+									"\r",
+									" function firstName() {\r",
+									"\r",
+									"    var firstName = [ \"Miguel\", \"Arthur\", \"Gael\", \"Theo\", \"Heitor\", \"Ravi\", \"Davi\", \"Bernardo\", \"Noah\", \"Gabriel\", \"Helena\", \"Alice\", \"Laura\", \"Sophia\", \"Manuela\", \"Maiteh\", \"Liz\", \"Cecilia\", \"Isabella\", \"Samuel\", \"Pedro\", \"Anthony\", \"Isaac\", \"Benicio\", \"Benjamin\", \"Matheus\", \"Joaquim\", \"Nicolas\", \"Lorenzo\", \"Henrique\", \"Jhon\",\"Rafael\", \"Henry\", \"Murilo\", \"Levi\", \"Guilherme\", \"Vicente\", \"Felipe\", \"Bryan\", \"Mateo\", \"Bento\", \"Pietro\", \"Leonardo\", \"Daniel\", \"Gustavo\", \"Lucas\", \"Emanuel\", \"Caleb\", \"Lucca\", \"Antonio\", \"Eduardo\", \"Enrico\", \"Caio\", \"Jose\", \"Augusto\", \"Mathias\", \"Vitor\", \"Enzo\", \"Cauan\", \"Francisco\", \"Rael\", \"Thomas\", \"Yuri\", \"Yan\", \"Oliver\", \"Otavio\", \"Nathan\", \"Vinicius\", \"Theodoro\", \"Valentim\", \"Ryan\", \"Luiz\", \"Leonovo\", \"Apollo\", \"Thiago\", \"Tomas\", \"Martin\", \"Erick\", \"Liam\", \"Josue\", \"Luan\", \"Asafe\", \"Raul\", \"Dominic\", \"Kaue\", \"Kalel\", \"Dom\", \"Estevao\", \"Breno\", \"Thales\", \"Israel\", \"Luisa\", \"Heloisa\", \"Elisa\", \"Julia\", \"Valentina\", \"Livia\", \"Antonella\", \"Lorena\", \"Ayla\", \"Isis\", \"Maya\", \"Esther\", \"Giovanna\", \"Lara\", \"Sarah\", \"Beatriz\", \"Aurora\", \"Mariana\", \"Olivia\", \"Isadora\", \"Luna\", \"Lunna\", \"Catarina\", \"Melissa\", \"Eduarda\", \"Lavinia\", \"Agatha\", \"Emanuelly\", \"Alicia\", \"Rebeca\", \"Yasmin\", \"Clara\", \"Marina\", \"Isabelly\", \"Ana\", \"Rafaela\", \"Stella\", \"Vitoria\", \"Allana\", \"Mirella\", \"Milena\", \"Bella\", \"Nicole\", \"Emilly\", \"Mariah\", \"Clarice\", \"Leticia\", \"Lais\", \"Bianca\", \"Melina\", \"Jade\", \"Fernanda\", \"Betina\", \"Heloise\", \"Zoe\", \"Louise\", \"Malu\", \"Melinda\", \"Chloe\", \"Flor\", \"Pietra\", \"Perola\", \"Elly\", \"Larissa\", \"Maria\", \"Eloah\", \"Eduarda\"]\r",
+									"\r",
+									" var randoItem = firstName[Math.floor(Math.random() * firstName.length)];\r",
+									"\r",
+									" return randoItem\r",
+									"\r",
+									" }\r",
+									"\r",
+									" function lastName(){\r",
+									"\r",
+									"     var lastName = [\"Alves da Silva\", \"Andrade Barbosa\", \"Barbosa Oliveira\", \"Oliveria da Silva\", \"Alves Pereira\", \"Conceição Barbosa\", \"Allen Young\", \"Almeida\", \"Alves\", \"Andrade\", \"Barbosa\", \"Barros\", \"Batista\", \"Borges\", \"Campos\", \"Cardoso\", \"Carvalho\", \"Castro\", \"Costa\", \"Dias\", \"Duarte\", \"Freitas\", \"Fernandes\", \"Ruy Barbosa\", \"Vital Brasil\", \"Miguel Pereira\", \"Maria da Anunciação\", \"Maria da Consolção\", \"Maria da Graça\", \"Maria Imaculada\", \"Maria do Céu\", \"Antunes\", \"Alves\", \"Fernandes\", \"Goncalves\", \"Nunes\", \"Pires\", \"Rodrigues\", \"Antonio Mariano\", \"Maria Isabel\", \"Almeida\", \"Azevedo\", \"Braga\", \"Barros\", \"Brasil\", \"Bahiense\", \"Campos\", \"Cardoso\", \"Correia\", \"Castro\", \"Costa\", \"Fontes\", \"Guimaraes\", \"Magalhaes\", \"Macedo\", \"Matos\", \"Pedreira\", \"Queiros\", \"Ribeiro\", \"Rocha\", \"Siqueira\", \"Sequeira\", \"Serra\", \"Souza\", \"Teixeira\", \"Valle\", \"Rossi\", \"Russo\", \"Ferrari\", \"Esposito\", \"Bianchi\", \"Romano\", \"Colombo\", \"Bruno\", \"Ricci\", \"Marino\", \"Greco\", \"Gallo\", \"DeLuca\", \"Conti\", \"Costa\", \"Mancini\", \"Giordano\", \"Rizzo\", \"Lombardi\", \"Barbieri\", \"Moretti\", \"Fontana\", \"Caruso\",\"Mariani\", \"Ferrara\", \"Santoro\", \"Rinaldi\", \"Leone\", \"Di Angelo\", \"Longo\", \"Galli\", \"Martini\", \"Martinelli\", \"Serra\", \"Conte\", \"Vitale\", \"Santis\", \"Marchetti\", \"Messina\", \"Gentile\", \"Villa\", \"Marini\", \"Lombardo\", \"Coppola\", \"Ferri\", \"Parisi\", \"Angelis\", \"Bianco\", \"Amato\", \"Fabbri\", \"Gatti\", \"Sala\", \"Morelli\", \"Grasso\", \"Pellegrini\", \"Ferraro\", \"Monti\", \"Palumbo\", \"Grassi\", \"Testa\", \"Valentini\", \"Carbone\", \"Benedetti\", \"Silvestri\", \"Farina\", \"Di Amico\", \"Martino\", \"Bernardi\", \"Caputo\", \"Mazza\", \"Sanna\", \"Fiore\", \"DeRosa\", \"Pellegrino\", \"Giuliani\", \"Rizzi\", \"Stefano\", \"Cattaneo\", \"Rossetti\", \"Orlando\", \"Basile\", \"Neri\", \"Baron\", \"EPalmieri\", \"Riva\", \"Romeo\", \"Franco\", \"Sorrentino\", \"Pagano\", \"Di Agostino\", \"Piras\", \"Ruggiero\", \"Montanari\", \"Battaglia\", \"Bellini\", \"Castelli\", \"Guerra\", \"Poli\", \"Valente\", \"Ferretti\"]\r",
+									"\r",
+									" var randoItem = lastName[Math.floor(Math.random() * lastName.length)];\r",
+									"\r",
+									" return randoItem\r",
+									"\r",
+									" }\r",
+									"\r",
+									" pm.environment.set(\"LastName\", lastName());\r",
+									"\r",
+									" pm.environment.set(\"FullName\", pm.variables.get(\"FirstName\") + \" \" + pm.variables.get(\"LastName\"));\r",
+									"\r",
+									"function password() {\r",
+									"\r",
+									"     var password = \"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789\";\r",
+									"\r",
+									"     var senha = \"@1aY\";\r",
+									"\r",
+									"     \r",
+									"     for (var i = 0; i < 10; i++) {\r",
+									"\r",
+									"     var randomIndex = Math.floor(Math.random() * password.length);\r",
+									"\r",
+									"     senha += password[randomIndex];\r",
+									"\r",
+									"     }\r",
+									"\r",
+									"     return senha;\r",
+									"\r",
+									"}\r",
+									"\r",
+									"console.log(password())\r",
+									"console.log()\r",
+									"\r",
+									"pm.environment.set(\"Password\",password())\r",
+									"\r",
+									"pm.environment.set(\"Increment\", Math.floor(Math.random()*( 99999 * 1 ) + 1))\r",
+									"\r",
+									"pm.environment.set(\"Mail\", pm.variables.get(\"FirstName\") + pm.variables.get(\"Increment\") + \"@squadorion.org\");"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Body matches string\", function () {\r",
+									"        pm.expect(pm.response.text()).to.include(\"Usuário cadastrado com sucesso\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status code name has string\", function () {\r",
+									"    pm.response.to.have.status(\"OK\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{currentToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"{{Mail}}\",\r\n  \"password\": \"123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}register",
+							"host": [
+								"{{url}}register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create_Login_Password_Vazio",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"// pm.environment.set(\"FullName\", pm.variables.replaceIn(\"{{$randomFirstName}}\") + \" \" + pm.variables.replaceIn(\"{{$randomLastName}}\"));\r",
+									"\r",
+									"// pm.environment.set(\"FirstName\", pm.variables.replaceIn(\"{{$randomFirstName}}\"))\r",
+									"\r",
+									"pm.environment.set(\"FirstName\", firstName());\r",
+									"\r",
+									"\r",
+									" function firstName() {\r",
+									"\r",
+									"    var firstName = [ \"Miguel\", \"Arthur\", \"Gael\", \"Theo\", \"Heitor\", \"Ravi\", \"Davi\", \"Bernardo\", \"Noah\", \"Gabriel\", \"Helena\", \"Alice\", \"Laura\", \"Sophia\", \"Manuela\", \"Maiteh\", \"Liz\", \"Cecilia\", \"Isabella\", \"Samuel\", \"Pedro\", \"Anthony\", \"Isaac\", \"Benicio\", \"Benjamin\", \"Matheus\", \"Joaquim\", \"Nicolas\", \"Lorenzo\", \"Henrique\", \"Jhon\",\"Rafael\", \"Henry\", \"Murilo\", \"Levi\", \"Guilherme\", \"Vicente\", \"Felipe\", \"Bryan\", \"Mateo\", \"Bento\", \"Pietro\", \"Leonardo\", \"Daniel\", \"Gustavo\", \"Lucas\", \"Emanuel\", \"Caleb\", \"Lucca\", \"Antonio\", \"Eduardo\", \"Enrico\", \"Caio\", \"Jose\", \"Augusto\", \"Mathias\", \"Vitor\", \"Enzo\", \"Cauan\", \"Francisco\", \"Rael\", \"Thomas\", \"Yuri\", \"Yan\", \"Oliver\", \"Otavio\", \"Nathan\", \"Vinicius\", \"Theodoro\", \"Valentim\", \"Ryan\", \"Luiz\", \"Leonovo\", \"Apollo\", \"Thiago\", \"Tomas\", \"Martin\", \"Erick\", \"Liam\", \"Josue\", \"Luan\", \"Asafe\", \"Raul\", \"Dominic\", \"Kaue\", \"Kalel\", \"Dom\", \"Estevao\", \"Breno\", \"Thales\", \"Israel\", \"Luisa\", \"Heloisa\", \"Elisa\", \"Julia\", \"Valentina\", \"Livia\", \"Antonella\", \"Lorena\", \"Ayla\", \"Isis\", \"Maya\", \"Esther\", \"Giovanna\", \"Lara\", \"Sarah\", \"Beatriz\", \"Aurora\", \"Mariana\", \"Olivia\", \"Isadora\", \"Luna\", \"Lunna\", \"Catarina\", \"Melissa\", \"Eduarda\", \"Lavinia\", \"Agatha\", \"Emanuelly\", \"Alicia\", \"Rebeca\", \"Yasmin\", \"Clara\", \"Marina\", \"Isabelly\", \"Ana\", \"Rafaela\", \"Stella\", \"Vitoria\", \"Allana\", \"Mirella\", \"Milena\", \"Bella\", \"Nicole\", \"Emilly\", \"Mariah\", \"Clarice\", \"Leticia\", \"Lais\", \"Bianca\", \"Melina\", \"Jade\", \"Fernanda\", \"Betina\", \"Heloise\", \"Zoe\", \"Louise\", \"Malu\", \"Melinda\", \"Chloe\", \"Flor\", \"Pietra\", \"Perola\", \"Elly\", \"Larissa\", \"Maria\", \"Eloah\", \"Eduarda\"]\r",
+									"\r",
+									" var randoItem = firstName[Math.floor(Math.random() * firstName.length)];\r",
+									"\r",
+									" return randoItem\r",
+									"\r",
+									" }\r",
+									"\r",
+									" function lastName(){\r",
+									"\r",
+									"     var lastName = [\"Alves da Silva\", \"Andrade Barbosa\", \"Barbosa Oliveira\", \"Oliveria da Silva\", \"Alves Pereira\", \"Conceição Barbosa\", \"Allen Young\", \"Almeida\", \"Alves\", \"Andrade\", \"Barbosa\", \"Barros\", \"Batista\", \"Borges\", \"Campos\", \"Cardoso\", \"Carvalho\", \"Castro\", \"Costa\", \"Dias\", \"Duarte\", \"Freitas\", \"Fernandes\", \"Ruy Barbosa\", \"Vital Brasil\", \"Miguel Pereira\", \"Maria da Anunciação\", \"Maria da Consolção\", \"Maria da Graça\", \"Maria Imaculada\", \"Maria do Céu\", \"Antunes\", \"Alves\", \"Fernandes\", \"Goncalves\", \"Nunes\", \"Pires\", \"Rodrigues\", \"Antonio Mariano\", \"Maria Isabel\", \"Almeida\", \"Azevedo\", \"Braga\", \"Barros\", \"Brasil\", \"Bahiense\", \"Campos\", \"Cardoso\", \"Correia\", \"Castro\", \"Costa\", \"Fontes\", \"Guimaraes\", \"Magalhaes\", \"Macedo\", \"Matos\", \"Pedreira\", \"Queiros\", \"Ribeiro\", \"Rocha\", \"Siqueira\", \"Sequeira\", \"Serra\", \"Souza\", \"Teixeira\", \"Valle\", \"Rossi\", \"Russo\", \"Ferrari\", \"Esposito\", \"Bianchi\", \"Romano\", \"Colombo\", \"Bruno\", \"Ricci\", \"Marino\", \"Greco\", \"Gallo\", \"DeLuca\", \"Conti\", \"Costa\", \"Mancini\", \"Giordano\", \"Rizzo\", \"Lombardi\", \"Barbieri\", \"Moretti\", \"Fontana\", \"Caruso\",\"Mariani\", \"Ferrara\", \"Santoro\", \"Rinaldi\", \"Leone\", \"Di Angelo\", \"Longo\", \"Galli\", \"Martini\", \"Martinelli\", \"Serra\", \"Conte\", \"Vitale\", \"Santis\", \"Marchetti\", \"Messina\", \"Gentile\", \"Villa\", \"Marini\", \"Lombardo\", \"Coppola\", \"Ferri\", \"Parisi\", \"Angelis\", \"Bianco\", \"Amato\", \"Fabbri\", \"Gatti\", \"Sala\", \"Morelli\", \"Grasso\", \"Pellegrini\", \"Ferraro\", \"Monti\", \"Palumbo\", \"Grassi\", \"Testa\", \"Valentini\", \"Carbone\", \"Benedetti\", \"Silvestri\", \"Farina\", \"Di Amico\", \"Martino\", \"Bernardi\", \"Caputo\", \"Mazza\", \"Sanna\", \"Fiore\", \"DeRosa\", \"Pellegrino\", \"Giuliani\", \"Rizzi\", \"Stefano\", \"Cattaneo\", \"Rossetti\", \"Orlando\", \"Basile\", \"Neri\", \"Baron\", \"EPalmieri\", \"Riva\", \"Romeo\", \"Franco\", \"Sorrentino\", \"Pagano\", \"Di Agostino\", \"Piras\", \"Ruggiero\", \"Montanari\", \"Battaglia\", \"Bellini\", \"Castelli\", \"Guerra\", \"Poli\", \"Valente\", \"Ferretti\"]\r",
+									"\r",
+									" var randoItem = lastName[Math.floor(Math.random() * lastName.length)];\r",
+									"\r",
+									" return randoItem\r",
+									"\r",
+									" }\r",
+									"\r",
+									" pm.environment.set(\"LastName\", lastName());\r",
+									"\r",
+									" pm.environment.set(\"FullName\", pm.variables.get(\"FirstName\") + \" \" + pm.variables.get(\"LastName\"));\r",
+									"\r",
+									"function password() {\r",
+									"\r",
+									"     var password = \"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789\";\r",
+									"\r",
+									"     var senha = \"@1aY\";\r",
+									"\r",
+									"     \r",
+									"     for (var i = 0; i < 10; i++) {\r",
+									"\r",
+									"     var randomIndex = Math.floor(Math.random() * password.length);\r",
+									"\r",
+									"     senha += password[randomIndex];\r",
+									"\r",
+									"     }\r",
+									"\r",
+									"     return senha;\r",
+									"\r",
+									"}\r",
+									"\r",
+									"console.log(password())\r",
+									"console.log()\r",
+									"\r",
+									"pm.environment.set(\"Password\",password())\r",
+									"\r",
+									"pm.environment.set(\"Increment\", Math.floor(Math.random()*( 99999 * 1 ) + 1))\r",
+									"\r",
+									"pm.environment.set(\"Mail\", pm.variables.get(\"FirstName\") + pm.variables.get(\"Increment\") + \"@squadorion.org\");"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Body matches string\", function () {\r",
+									"        pm.expect(pm.response.text()).to.include(\"Usuário cadastrado com sucesso\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status code name has string\", function () {\r",
+									"    pm.response.to.have.status(\"OK\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{currentToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"{{Mail}}\",\r\n  \"password\": \" \"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}register",
+							"host": [
+								"{{url}}register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create_Login_Mail_Vazio",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"// pm.environment.set(\"FullName\", pm.variables.replaceIn(\"{{$randomFirstName}}\") + \" \" + pm.variables.replaceIn(\"{{$randomLastName}}\"));\r",
+									"\r",
+									"// pm.environment.set(\"FirstName\", pm.variables.replaceIn(\"{{$randomFirstName}}\"))\r",
+									"\r",
+									"pm.environment.set(\"FirstName\", firstName());\r",
+									"\r",
+									"\r",
+									" function firstName() {\r",
+									"\r",
+									"    var firstName = [ \"Miguel\", \"Arthur\", \"Gael\", \"Theo\", \"Heitor\", \"Ravi\", \"Davi\", \"Bernardo\", \"Noah\", \"Gabriel\", \"Helena\", \"Alice\", \"Laura\", \"Sophia\", \"Manuela\", \"Maiteh\", \"Liz\", \"Cecilia\", \"Isabella\", \"Samuel\", \"Pedro\", \"Anthony\", \"Isaac\", \"Benicio\", \"Benjamin\", \"Matheus\", \"Joaquim\", \"Nicolas\", \"Lorenzo\", \"Henrique\", \"Jhon\",\"Rafael\", \"Henry\", \"Murilo\", \"Levi\", \"Guilherme\", \"Vicente\", \"Felipe\", \"Bryan\", \"Mateo\", \"Bento\", \"Pietro\", \"Leonardo\", \"Daniel\", \"Gustavo\", \"Lucas\", \"Emanuel\", \"Caleb\", \"Lucca\", \"Antonio\", \"Eduardo\", \"Enrico\", \"Caio\", \"Jose\", \"Augusto\", \"Mathias\", \"Vitor\", \"Enzo\", \"Cauan\", \"Francisco\", \"Rael\", \"Thomas\", \"Yuri\", \"Yan\", \"Oliver\", \"Otavio\", \"Nathan\", \"Vinicius\", \"Theodoro\", \"Valentim\", \"Ryan\", \"Luiz\", \"Leonovo\", \"Apollo\", \"Thiago\", \"Tomas\", \"Martin\", \"Erick\", \"Liam\", \"Josue\", \"Luan\", \"Asafe\", \"Raul\", \"Dominic\", \"Kaue\", \"Kalel\", \"Dom\", \"Estevao\", \"Breno\", \"Thales\", \"Israel\", \"Luisa\", \"Heloisa\", \"Elisa\", \"Julia\", \"Valentina\", \"Livia\", \"Antonella\", \"Lorena\", \"Ayla\", \"Isis\", \"Maya\", \"Esther\", \"Giovanna\", \"Lara\", \"Sarah\", \"Beatriz\", \"Aurora\", \"Mariana\", \"Olivia\", \"Isadora\", \"Luna\", \"Lunna\", \"Catarina\", \"Melissa\", \"Eduarda\", \"Lavinia\", \"Agatha\", \"Emanuelly\", \"Alicia\", \"Rebeca\", \"Yasmin\", \"Clara\", \"Marina\", \"Isabelly\", \"Ana\", \"Rafaela\", \"Stella\", \"Vitoria\", \"Allana\", \"Mirella\", \"Milena\", \"Bella\", \"Nicole\", \"Emilly\", \"Mariah\", \"Clarice\", \"Leticia\", \"Lais\", \"Bianca\", \"Melina\", \"Jade\", \"Fernanda\", \"Betina\", \"Heloise\", \"Zoe\", \"Louise\", \"Malu\", \"Melinda\", \"Chloe\", \"Flor\", \"Pietra\", \"Perola\", \"Elly\", \"Larissa\", \"Maria\", \"Eloah\", \"Eduarda\"]\r",
+									"\r",
+									" var randoItem = firstName[Math.floor(Math.random() * firstName.length)];\r",
+									"\r",
+									" return randoItem\r",
+									"\r",
+									" }\r",
+									"\r",
+									" function lastName(){\r",
+									"\r",
+									"     var lastName = [\"Alves da Silva\", \"Andrade Barbosa\", \"Barbosa Oliveira\", \"Oliveria da Silva\", \"Alves Pereira\", \"Conceição Barbosa\", \"Allen Young\", \"Almeida\", \"Alves\", \"Andrade\", \"Barbosa\", \"Barros\", \"Batista\", \"Borges\", \"Campos\", \"Cardoso\", \"Carvalho\", \"Castro\", \"Costa\", \"Dias\", \"Duarte\", \"Freitas\", \"Fernandes\", \"Ruy Barbosa\", \"Vital Brasil\", \"Miguel Pereira\", \"Maria da Anunciação\", \"Maria da Consolção\", \"Maria da Graça\", \"Maria Imaculada\", \"Maria do Céu\", \"Antunes\", \"Alves\", \"Fernandes\", \"Goncalves\", \"Nunes\", \"Pires\", \"Rodrigues\", \"Antonio Mariano\", \"Maria Isabel\", \"Almeida\", \"Azevedo\", \"Braga\", \"Barros\", \"Brasil\", \"Bahiense\", \"Campos\", \"Cardoso\", \"Correia\", \"Castro\", \"Costa\", \"Fontes\", \"Guimaraes\", \"Magalhaes\", \"Macedo\", \"Matos\", \"Pedreira\", \"Queiros\", \"Ribeiro\", \"Rocha\", \"Siqueira\", \"Sequeira\", \"Serra\", \"Souza\", \"Teixeira\", \"Valle\", \"Rossi\", \"Russo\", \"Ferrari\", \"Esposito\", \"Bianchi\", \"Romano\", \"Colombo\", \"Bruno\", \"Ricci\", \"Marino\", \"Greco\", \"Gallo\", \"DeLuca\", \"Conti\", \"Costa\", \"Mancini\", \"Giordano\", \"Rizzo\", \"Lombardi\", \"Barbieri\", \"Moretti\", \"Fontana\", \"Caruso\",\"Mariani\", \"Ferrara\", \"Santoro\", \"Rinaldi\", \"Leone\", \"Di Angelo\", \"Longo\", \"Galli\", \"Martini\", \"Martinelli\", \"Serra\", \"Conte\", \"Vitale\", \"Santis\", \"Marchetti\", \"Messina\", \"Gentile\", \"Villa\", \"Marini\", \"Lombardo\", \"Coppola\", \"Ferri\", \"Parisi\", \"Angelis\", \"Bianco\", \"Amato\", \"Fabbri\", \"Gatti\", \"Sala\", \"Morelli\", \"Grasso\", \"Pellegrini\", \"Ferraro\", \"Monti\", \"Palumbo\", \"Grassi\", \"Testa\", \"Valentini\", \"Carbone\", \"Benedetti\", \"Silvestri\", \"Farina\", \"Di Amico\", \"Martino\", \"Bernardi\", \"Caputo\", \"Mazza\", \"Sanna\", \"Fiore\", \"DeRosa\", \"Pellegrino\", \"Giuliani\", \"Rizzi\", \"Stefano\", \"Cattaneo\", \"Rossetti\", \"Orlando\", \"Basile\", \"Neri\", \"Baron\", \"EPalmieri\", \"Riva\", \"Romeo\", \"Franco\", \"Sorrentino\", \"Pagano\", \"Di Agostino\", \"Piras\", \"Ruggiero\", \"Montanari\", \"Battaglia\", \"Bellini\", \"Castelli\", \"Guerra\", \"Poli\", \"Valente\", \"Ferretti\"]\r",
+									"\r",
+									" var randoItem = lastName[Math.floor(Math.random() * lastName.length)];\r",
+									"\r",
+									" return randoItem\r",
+									"\r",
+									" }\r",
+									"\r",
+									" pm.environment.set(\"LastName\", lastName());\r",
+									"\r",
+									" pm.environment.set(\"FullName\", pm.variables.get(\"FirstName\") + \" \" + pm.variables.get(\"LastName\"));\r",
+									"\r",
+									"function password() {\r",
+									"\r",
+									"     var password = \"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789\";\r",
+									"\r",
+									"     var senha = \"@1aY\";\r",
+									"\r",
+									"     \r",
+									"     for (var i = 0; i < 10; i++) {\r",
+									"\r",
+									"     var randomIndex = Math.floor(Math.random() * password.length);\r",
+									"\r",
+									"     senha += password[randomIndex];\r",
+									"\r",
+									"     }\r",
+									"\r",
+									"     return senha;\r",
+									"\r",
+									"}\r",
+									"\r",
+									"console.log(password())\r",
+									"console.log()\r",
+									"\r",
+									"pm.environment.set(\"Password\",password())\r",
+									"\r",
+									"pm.environment.set(\"Increment\", Math.floor(Math.random()*( 99999 * 1 ) + 1))\r",
+									"\r",
+									"pm.environment.set(\"Mail\", pm.variables.get(\"FirstName\") + pm.variables.get(\"Increment\") + \"@squadorion.org\");"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Status code name has string\", function () {\r",
+									"    pm.response.to.have.status(\"OK\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{currentToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \" \",\r\n  \"password\": \"{{Password}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}register",
+							"host": [
+								"{{url}}register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create_Login_Mail_duplicado",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"// pm.environment.set(\"FullName\", pm.variables.replaceIn(\"{{$randomFirstName}}\") + \" \" + pm.variables.replaceIn(\"{{$randomLastName}}\"));\r",
+									"\r",
+									"// pm.environment.set(\"FirstName\", pm.variables.replaceIn(\"{{$randomFirstName}}\"))\r",
+									"\r",
+									"pm.environment.set(\"FirstName\", firstName());\r",
+									"\r",
+									"\r",
+									" function firstName() {\r",
+									"\r",
+									"    var firstName = [ \"Miguel\", \"Arthur\", \"Gael\", \"Theo\", \"Heitor\", \"Ravi\", \"Davi\", \"Bernardo\", \"Noah\", \"Gabriel\", \"Helena\", \"Alice\", \"Laura\", \"Sophia\", \"Manuela\", \"Maiteh\", \"Liz\", \"Cecilia\", \"Isabella\", \"Samuel\", \"Pedro\", \"Anthony\", \"Isaac\", \"Benicio\", \"Benjamin\", \"Matheus\", \"Joaquim\", \"Nicolas\", \"Lorenzo\", \"Henrique\", \"Jhon\",\"Rafael\", \"Henry\", \"Murilo\", \"Levi\", \"Guilherme\", \"Vicente\", \"Felipe\", \"Bryan\", \"Mateo\", \"Bento\", \"Pietro\", \"Leonardo\", \"Daniel\", \"Gustavo\", \"Lucas\", \"Emanuel\", \"Caleb\", \"Lucca\", \"Antonio\", \"Eduardo\", \"Enrico\", \"Caio\", \"Jose\", \"Augusto\", \"Mathias\", \"Vitor\", \"Enzo\", \"Cauan\", \"Francisco\", \"Rael\", \"Thomas\", \"Yuri\", \"Yan\", \"Oliver\", \"Otavio\", \"Nathan\", \"Vinicius\", \"Theodoro\", \"Valentim\", \"Ryan\", \"Luiz\", \"Leonovo\", \"Apollo\", \"Thiago\", \"Tomas\", \"Martin\", \"Erick\", \"Liam\", \"Josue\", \"Luan\", \"Asafe\", \"Raul\", \"Dominic\", \"Kaue\", \"Kalel\", \"Dom\", \"Estevao\", \"Breno\", \"Thales\", \"Israel\", \"Luisa\", \"Heloisa\", \"Elisa\", \"Julia\", \"Valentina\", \"Livia\", \"Antonella\", \"Lorena\", \"Ayla\", \"Isis\", \"Maya\", \"Esther\", \"Giovanna\", \"Lara\", \"Sarah\", \"Beatriz\", \"Aurora\", \"Mariana\", \"Olivia\", \"Isadora\", \"Luna\", \"Lunna\", \"Catarina\", \"Melissa\", \"Eduarda\", \"Lavinia\", \"Agatha\", \"Emanuelly\", \"Alicia\", \"Rebeca\", \"Yasmin\", \"Clara\", \"Marina\", \"Isabelly\", \"Ana\", \"Rafaela\", \"Stella\", \"Vitoria\", \"Allana\", \"Mirella\", \"Milena\", \"Bella\", \"Nicole\", \"Emilly\", \"Mariah\", \"Clarice\", \"Leticia\", \"Lais\", \"Bianca\", \"Melina\", \"Jade\", \"Fernanda\", \"Betina\", \"Heloise\", \"Zoe\", \"Louise\", \"Malu\", \"Melinda\", \"Chloe\", \"Flor\", \"Pietra\", \"Perola\", \"Elly\", \"Larissa\", \"Maria\", \"Eloah\", \"Eduarda\"]\r",
+									"\r",
+									" var randoItem = firstName[Math.floor(Math.random() * firstName.length)];\r",
+									"\r",
+									" return randoItem\r",
+									"\r",
+									" }\r",
+									"\r",
+									" function lastName(){\r",
+									"\r",
+									"     var lastName = [\"Alves da Silva\", \"Andrade Barbosa\", \"Barbosa Oliveira\", \"Oliveria da Silva\", \"Alves Pereira\", \"Conceição Barbosa\", \"Allen Young\", \"Almeida\", \"Alves\", \"Andrade\", \"Barbosa\", \"Barros\", \"Batista\", \"Borges\", \"Campos\", \"Cardoso\", \"Carvalho\", \"Castro\", \"Costa\", \"Dias\", \"Duarte\", \"Freitas\", \"Fernandes\", \"Ruy Barbosa\", \"Vital Brasil\", \"Miguel Pereira\", \"Maria da Anunciação\", \"Maria da Consolção\", \"Maria da Graça\", \"Maria Imaculada\", \"Maria do Céu\", \"Antunes\", \"Alves\", \"Fernandes\", \"Goncalves\", \"Nunes\", \"Pires\", \"Rodrigues\", \"Antonio Mariano\", \"Maria Isabel\", \"Almeida\", \"Azevedo\", \"Braga\", \"Barros\", \"Brasil\", \"Bahiense\", \"Campos\", \"Cardoso\", \"Correia\", \"Castro\", \"Costa\", \"Fontes\", \"Guimaraes\", \"Magalhaes\", \"Macedo\", \"Matos\", \"Pedreira\", \"Queiros\", \"Ribeiro\", \"Rocha\", \"Siqueira\", \"Sequeira\", \"Serra\", \"Souza\", \"Teixeira\", \"Valle\", \"Rossi\", \"Russo\", \"Ferrari\", \"Esposito\", \"Bianchi\", \"Romano\", \"Colombo\", \"Bruno\", \"Ricci\", \"Marino\", \"Greco\", \"Gallo\", \"DeLuca\", \"Conti\", \"Costa\", \"Mancini\", \"Giordano\", \"Rizzo\", \"Lombardi\", \"Barbieri\", \"Moretti\", \"Fontana\", \"Caruso\",\"Mariani\", \"Ferrara\", \"Santoro\", \"Rinaldi\", \"Leone\", \"Di Angelo\", \"Longo\", \"Galli\", \"Martini\", \"Martinelli\", \"Serra\", \"Conte\", \"Vitale\", \"Santis\", \"Marchetti\", \"Messina\", \"Gentile\", \"Villa\", \"Marini\", \"Lombardo\", \"Coppola\", \"Ferri\", \"Parisi\", \"Angelis\", \"Bianco\", \"Amato\", \"Fabbri\", \"Gatti\", \"Sala\", \"Morelli\", \"Grasso\", \"Pellegrini\", \"Ferraro\", \"Monti\", \"Palumbo\", \"Grassi\", \"Testa\", \"Valentini\", \"Carbone\", \"Benedetti\", \"Silvestri\", \"Farina\", \"Di Amico\", \"Martino\", \"Bernardi\", \"Caputo\", \"Mazza\", \"Sanna\", \"Fiore\", \"DeRosa\", \"Pellegrino\", \"Giuliani\", \"Rizzi\", \"Stefano\", \"Cattaneo\", \"Rossetti\", \"Orlando\", \"Basile\", \"Neri\", \"Baron\", \"EPalmieri\", \"Riva\", \"Romeo\", \"Franco\", \"Sorrentino\", \"Pagano\", \"Di Agostino\", \"Piras\", \"Ruggiero\", \"Montanari\", \"Battaglia\", \"Bellini\", \"Castelli\", \"Guerra\", \"Poli\", \"Valente\", \"Ferretti\"]\r",
+									"\r",
+									" var randoItem = lastName[Math.floor(Math.random() * lastName.length)];\r",
+									"\r",
+									" return randoItem\r",
+									"\r",
+									" }\r",
+									"\r",
+									" pm.environment.set(\"LastName\", lastName());\r",
+									"\r",
+									" pm.environment.set(\"FullName\", pm.variables.get(\"FirstName\") + \" \" + pm.variables.get(\"LastName\"));\r",
+									"\r",
+									"function password() {\r",
+									"\r",
+									"     var password = \"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789\";\r",
+									"\r",
+									"     var senha = \"@1aY\";\r",
+									"\r",
+									"     \r",
+									"     for (var i = 0; i < 10; i++) {\r",
+									"\r",
+									"     var randomIndex = Math.floor(Math.random() * password.length);\r",
+									"\r",
+									"     senha += password[randomIndex];\r",
+									"\r",
+									"     }\r",
+									"\r",
+									"     return senha;\r",
+									"\r",
+									"}\r",
+									"\r",
+									"console.log(password())\r",
+									"console.log()\r",
+									"\r",
+									"pm.environment.set(\"Password\",password())\r",
+									"\r",
+									"pm.environment.set(\"Increment\", Math.floor(Math.random()*( 99999 * 1 ) + 1))\r",
+									"\r",
+									"pm.environment.set(\"Mail\", pm.variables.get(\"FirstName\") + pm.variables.get(\"Increment\") + \"@squadorion.org\");"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Body matches string\", function () {\r",
+									"        pm.expect(pm.response.text()).to.include(\"Usuario ja existente com email informado\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status code name has string\", function () {\r",
+									"    pm.response.to.have.status(\"OK\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{currentToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": null,\r\n  \"password\": \"{{Password}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}register",
+							"host": [
+								"{{url}}register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create_Login_Mail_Fora_Padrao",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"// pm.environment.set(\"FullName\", pm.variables.replaceIn(\"{{$randomFirstName}}\") + \" \" + pm.variables.replaceIn(\"{{$randomLastName}}\"));\r",
+									"\r",
+									"// pm.environment.set(\"FirstName\", pm.variables.replaceIn(\"{{$randomFirstName}}\"))\r",
+									"\r",
+									"pm.environment.set(\"FirstName\", firstName());\r",
+									"\r",
+									"\r",
+									" function firstName() {\r",
+									"\r",
+									"    var firstName = [ \"Miguel\", \"Arthur\", \"Gael\", \"Theo\", \"Heitor\", \"Ravi\", \"Davi\", \"Bernardo\", \"Noah\", \"Gabriel\", \"Helena\", \"Alice\", \"Laura\", \"Sophia\", \"Manuela\", \"Maiteh\", \"Liz\", \"Cecilia\", \"Isabella\", \"Samuel\", \"Pedro\", \"Anthony\", \"Isaac\", \"Benicio\", \"Benjamin\", \"Matheus\", \"Joaquim\", \"Nicolas\", \"Lorenzo\", \"Henrique\", \"Jhon\",\"Rafael\", \"Henry\", \"Murilo\", \"Levi\", \"Guilherme\", \"Vicente\", \"Felipe\", \"Bryan\", \"Mateo\", \"Bento\", \"Pietro\", \"Leonardo\", \"Daniel\", \"Gustavo\", \"Lucas\", \"Emanuel\", \"Caleb\", \"Lucca\", \"Antonio\", \"Eduardo\", \"Enrico\", \"Caio\", \"Jose\", \"Augusto\", \"Mathias\", \"Vitor\", \"Enzo\", \"Cauan\", \"Francisco\", \"Rael\", \"Thomas\", \"Yuri\", \"Yan\", \"Oliver\", \"Otavio\", \"Nathan\", \"Vinicius\", \"Theodoro\", \"Valentim\", \"Ryan\", \"Luiz\", \"Leonovo\", \"Apollo\", \"Thiago\", \"Tomas\", \"Martin\", \"Erick\", \"Liam\", \"Josue\", \"Luan\", \"Asafe\", \"Raul\", \"Dominic\", \"Kaue\", \"Kalel\", \"Dom\", \"Estevao\", \"Breno\", \"Thales\", \"Israel\", \"Luisa\", \"Heloisa\", \"Elisa\", \"Julia\", \"Valentina\", \"Livia\", \"Antonella\", \"Lorena\", \"Ayla\", \"Isis\", \"Maya\", \"Esther\", \"Giovanna\", \"Lara\", \"Sarah\", \"Beatriz\", \"Aurora\", \"Mariana\", \"Olivia\", \"Isadora\", \"Luna\", \"Lunna\", \"Catarina\", \"Melissa\", \"Eduarda\", \"Lavinia\", \"Agatha\", \"Emanuelly\", \"Alicia\", \"Rebeca\", \"Yasmin\", \"Clara\", \"Marina\", \"Isabelly\", \"Ana\", \"Rafaela\", \"Stella\", \"Vitoria\", \"Allana\", \"Mirella\", \"Milena\", \"Bella\", \"Nicole\", \"Emilly\", \"Mariah\", \"Clarice\", \"Leticia\", \"Lais\", \"Bianca\", \"Melina\", \"Jade\", \"Fernanda\", \"Betina\", \"Heloise\", \"Zoe\", \"Louise\", \"Malu\", \"Melinda\", \"Chloe\", \"Flor\", \"Pietra\", \"Perola\", \"Elly\", \"Larissa\", \"Maria\", \"Eloah\", \"Eduarda\"]\r",
+									"\r",
+									" var randoItem = firstName[Math.floor(Math.random() * firstName.length)];\r",
+									"\r",
+									" return randoItem\r",
+									"\r",
+									" }\r",
+									"\r",
+									" function lastName(){\r",
+									"\r",
+									"     var lastName = [\"Alves da Silva\", \"Andrade Barbosa\", \"Barbosa Oliveira\", \"Oliveria da Silva\", \"Alves Pereira\", \"Conceição Barbosa\", \"Allen Young\", \"Almeida\", \"Alves\", \"Andrade\", \"Barbosa\", \"Barros\", \"Batista\", \"Borges\", \"Campos\", \"Cardoso\", \"Carvalho\", \"Castro\", \"Costa\", \"Dias\", \"Duarte\", \"Freitas\", \"Fernandes\", \"Ruy Barbosa\", \"Vital Brasil\", \"Miguel Pereira\", \"Maria da Anunciação\", \"Maria da Consolção\", \"Maria da Graça\", \"Maria Imaculada\", \"Maria do Céu\", \"Antunes\", \"Alves\", \"Fernandes\", \"Goncalves\", \"Nunes\", \"Pires\", \"Rodrigues\", \"Antonio Mariano\", \"Maria Isabel\", \"Almeida\", \"Azevedo\", \"Braga\", \"Barros\", \"Brasil\", \"Bahiense\", \"Campos\", \"Cardoso\", \"Correia\", \"Castro\", \"Costa\", \"Fontes\", \"Guimaraes\", \"Magalhaes\", \"Macedo\", \"Matos\", \"Pedreira\", \"Queiros\", \"Ribeiro\", \"Rocha\", \"Siqueira\", \"Sequeira\", \"Serra\", \"Souza\", \"Teixeira\", \"Valle\", \"Rossi\", \"Russo\", \"Ferrari\", \"Esposito\", \"Bianchi\", \"Romano\", \"Colombo\", \"Bruno\", \"Ricci\", \"Marino\", \"Greco\", \"Gallo\", \"DeLuca\", \"Conti\", \"Costa\", \"Mancini\", \"Giordano\", \"Rizzo\", \"Lombardi\", \"Barbieri\", \"Moretti\", \"Fontana\", \"Caruso\",\"Mariani\", \"Ferrara\", \"Santoro\", \"Rinaldi\", \"Leone\", \"Di Angelo\", \"Longo\", \"Galli\", \"Martini\", \"Martinelli\", \"Serra\", \"Conte\", \"Vitale\", \"Santis\", \"Marchetti\", \"Messina\", \"Gentile\", \"Villa\", \"Marini\", \"Lombardo\", \"Coppola\", \"Ferri\", \"Parisi\", \"Angelis\", \"Bianco\", \"Amato\", \"Fabbri\", \"Gatti\", \"Sala\", \"Morelli\", \"Grasso\", \"Pellegrini\", \"Ferraro\", \"Monti\", \"Palumbo\", \"Grassi\", \"Testa\", \"Valentini\", \"Carbone\", \"Benedetti\", \"Silvestri\", \"Farina\", \"Di Amico\", \"Martino\", \"Bernardi\", \"Caputo\", \"Mazza\", \"Sanna\", \"Fiore\", \"DeRosa\", \"Pellegrino\", \"Giuliani\", \"Rizzi\", \"Stefano\", \"Cattaneo\", \"Rossetti\", \"Orlando\", \"Basile\", \"Neri\", \"Baron\", \"EPalmieri\", \"Riva\", \"Romeo\", \"Franco\", \"Sorrentino\", \"Pagano\", \"Di Agostino\", \"Piras\", \"Ruggiero\", \"Montanari\", \"Battaglia\", \"Bellini\", \"Castelli\", \"Guerra\", \"Poli\", \"Valente\", \"Ferretti\"]\r",
+									"\r",
+									" var randoItem = lastName[Math.floor(Math.random() * lastName.length)];\r",
+									"\r",
+									" return randoItem\r",
+									"\r",
+									" }\r",
+									"\r",
+									" pm.environment.set(\"LastName\", lastName());\r",
+									"\r",
+									" pm.environment.set(\"FullName\", pm.variables.get(\"FirstName\") + \" \" + pm.variables.get(\"LastName\"));\r",
+									"\r",
+									"function password() {\r",
+									"\r",
+									"     var password = \"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789\";\r",
+									"\r",
+									"     var senha = \"@1aY\";\r",
+									"\r",
+									"     \r",
+									"     for (var i = 0; i < 10; i++) {\r",
+									"\r",
+									"     var randomIndex = Math.floor(Math.random() * password.length);\r",
+									"\r",
+									"     senha += password[randomIndex];\r",
+									"\r",
+									"     }\r",
+									"\r",
+									"     return senha;\r",
+									"\r",
+									"}\r",
+									"\r",
+									"console.log(password())\r",
+									"console.log()\r",
+									"\r",
+									"pm.environment.set(\"Password\",password())\r",
+									"\r",
+									"pm.environment.set(\"Increment\", Math.floor(Math.random()*( 99999 * 1 ) + 1))\r",
+									"\r",
+									"pm.environment.set(\"Mail\", pm.variables.get(\"FirstName\") + pm.variables.get(\"Increment\") + \"@squadorion.org\");"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Body matches string\", function () {\r",
+									"        pm.expect(pm.response.text()).to.include(\"Usuario ja existente com email informado\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status code name has string\", function () {\r",
+									"    pm.response.to.have.status(\"OK\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{currentToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"123456\",\r\n  \"password\": \"{{Password}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}register",
+							"host": [
+								"{{url}}register"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "DELETE",
+			"item": [
+				{
+					"name": "Product_Delete",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Body matches string\", function () {\r",
+									"        pm.expect(pm.response.text()).to.include(\"Produto deletado com sucesso!\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status code name has string\", function () {\r",
+									"    pm.response.to.have.status(\"OK\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{currentToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}267",
+							"host": [
+								"{{url}}267"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Product_Delete_Item_Inexistente",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{currentToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}10000000000",
+							"host": [
+								"{{url}}10000000000"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
