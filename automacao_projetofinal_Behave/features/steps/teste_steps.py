@@ -67,39 +67,21 @@ def step_impl(context):
     context.browser.find_element(By.ID, "mui-6").send_keys("20,00")
     sleep(0.5)
     pyautogui.click(x=865, y=725)
-    # context.browser.find_element(By.CSS_SELECTOR, "#mui-5").click()
-    
-    
-    
-    
-    
-    
-    
-    # campo_nome = context.browser.find_element_by_name("name")
-    # campo_nome.send_keys("Tênis Infantil Vivi Star")
-
-    # campo_email = driver.find_element_by_id("email")
-    # campo_email.send_keys("exemplo@email.com")
-
-    # # Enviar o formulário
-    # botao_enviar = driver.find_element_by_id("enviar")
-    # botao_enviar.click()
-    # campo_mensagem = driver.find_element_by_id("mensagem")
-    # campo_mensagem.send_keys("Olá, este é um exemplo de mensagem.")
-    # pyautogui.click(x=887, y=269)
-    # pyautogui.write("Tnis Infantil Vivi Star")
+    pyautogui.write("D:\IJJ\Itensdesafio\Tenis_infantil.jpg")
+    pyautogui.press("Enter")
+  
 
 
-
-    
-
-
-# @when("clicar em enviar novo produto")
-    # btn = context.browser.find_element(By.XPATH, "/html/body/div/main/form/button")
-    # btn.submit()
+@when("clicar em enviar novo produto")
+def form_text(context):
+    btn = context.browser.find_element(By.XPATH, "/html/body/div/header/section[2]/div/div[1]/div/form/button")
+    btn.submit()
 
 
-# @then('deverei receber a mensagem "Produto enviado com sucesso!"')
-#     pass
-
-# Localizar os elementos do formulário e preenchê-los
+@then('deverei receber a mensagem "Produto enviado com sucesso!"')
+def verify_access(context):
+    response = requests.get("https://projetofinal.jogajuntoinstituto.org/products/")
+    if response.status_code == 201:
+        print('Produto enviado com sucesso!')
+    else:
+        print(f'Falha na solicitação com o código de status {response.status_code}.')
