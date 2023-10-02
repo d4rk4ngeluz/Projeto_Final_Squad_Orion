@@ -1,8 +1,5 @@
 from behave import given, when, then
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import Select, WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-from selenium import webdriver
 from time import sleep
 import requests
 import pyautogui
@@ -11,6 +8,7 @@ import pyautogui
 @given("que o usuario esteja na pagina do backoffice")
 def go_to_page(context):
     context.browser.get("https://projetofinal.jogajuntoinstituto.org//")
+    # context.browser.maximize_window()
 
 @when("preencher os dados de login")
 def form_text(context):
@@ -42,7 +40,6 @@ def verify_access(context):
 
 
 pyautogui.PAUSE = 5
-# sleep(5)
 
 @when("clicar em adicionar")
 def form_text(context):
@@ -50,10 +47,7 @@ def form_text(context):
     pyautogui.click(x=1791, y=736)
 
 pyautogui.PAUSE = 5
-# sleep(5)
 
-# @when('deverei conseguir cadastrar o item "Sapato"')
-# def form_text(context):
 @when(u'conseguir cadastrar o item "Sapato"')
 def step_impl(context):
     context.browser.find_element(By.ID, "mui-2").send_keys("Tênis Infantil Vivi Star")
@@ -66,11 +60,8 @@ def step_impl(context):
     sleep(0.5)
     context.browser.find_element(By.ID, "mui-6").send_keys("20,00")
     sleep(0.5)
-    pyautogui.click(x=865, y=725)
-    pyautogui.write("D:\IJJ\Itensdesafio\Tenis_infantil.jpg")
-    pyautogui.press("Enter")
-  
-
+    context.browser.find_element(By.XPATH, "//*[@id='mui-5']").send_keys('D:\IJJ\Itensdesafio\Tenis_infantil.jpg')
+    
 
 @when("clicar em enviar novo produto")
 def form_text(context):
@@ -85,3 +76,6 @@ def verify_access(context):
         print('Produto enviado com sucesso!')
     else:
         print(f'Falha na solicitação com o código de status {response.status_code}.')
+
+    sleep(5)
+    context.browser.quit()
