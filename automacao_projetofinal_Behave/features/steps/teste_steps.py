@@ -8,7 +8,7 @@ import pyautogui
 @given("que o usuario esteja na pagina do backoffice")
 def go_to_page(context):
     context.browser.get("https://projetofinal.jogajuntoinstituto.org//")
-    # context.browser.maximize_window()
+    context.browser.maximize_window()
 
 @when("preencher os dados de login")
 def form_text(context):
@@ -60,7 +60,7 @@ def step_impl(context):
     sleep(0.5)
     context.browser.find_element(By.ID, "mui-6").send_keys("20,00")
     sleep(0.5)
-    context.browser.find_element(By.XPATH, "//*[@id='mui-5']").send_keys('D:\IJJ\Itensdesafio\Tenis_infantil.jpg')
+    context.browser.find_element(By.XPATH, "//*[@id='mui-5']").send_keys('F:\\ijj\\itensDesafio\\Tenis_infantil.jpg')
     
 
 @when("clicar em enviar novo produto")

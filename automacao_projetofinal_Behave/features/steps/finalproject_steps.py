@@ -7,7 +7,7 @@
 
 # @given("que o usuario esteja na pagina do backoffice")
 # def go_to_page(context):
-#     context.browser.get("https://projetofinal.jogajuntoinstituto.org//")
+#     context.browser.get("https://projetofinal.jogajuntoinstituto.org")
 
 # @when("preencher os dados de login")
 # def form_text(context):
